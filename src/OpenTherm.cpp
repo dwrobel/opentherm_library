@@ -4,6 +4,7 @@ Copyright 2018, Ihor Melnyk
 */
 
 #include "OpenTherm.h"
+namespace OT {
 
 OpenTherm::OpenTherm(int inPin, int outPin):
 	inPin(inPin),
@@ -330,3 +331,5 @@ float OpenTherm::getBoilerTemperature() {
 	unsigned long response = sendRequest(buildGetBoilerTemperatureRequest());
 	return getTemperature(response);
 }
+
+} // namespace OT
