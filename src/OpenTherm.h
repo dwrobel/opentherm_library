@@ -16,6 +16,8 @@ P MGS-TYPE SPARE DATA-ID  DATA-VALUE
 #include <stdint.h>
 #include <Arduino.h>
 
+namespace OT {
+
 enum class OpenThermResponseStatus : byte
 {
     NONE,
@@ -256,5 +258,6 @@ private:
 #ifndef IRAM_ATTR
 #define IRAM_ATTR ICACHE_RAM_ATTR
 #endif
+} // namespace OT
 
 #endif // OpenTherm_h

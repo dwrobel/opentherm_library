@@ -8,6 +8,8 @@ Copyright 2023, Ihor Melnyk
 #include "FunctionalInterrupt.h"
 #endif
 
+namespace OT {
+
 OpenTherm::OpenTherm(int inPin, int outPin, bool isSlave) :
     status(OpenThermStatus::NOT_INITIALIZED),
     inPin(inPin),
@@ -576,3 +578,5 @@ unsigned char OpenTherm::getFault()
 {
     return ((sendRequest(buildRequest(OpenThermRequestType::READ, OpenThermMessageID::ASFflags, 0)) >> 8) & 0xff);
 }
+
+} // namespace OT
