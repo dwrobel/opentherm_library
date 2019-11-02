@@ -9,8 +9,8 @@ OpenTherm::OpenTherm(int inPin, int outPin, bool isSlave):
 	inPin(inPin),
 	outPin(outPin),
     isSlave(isSlave),
-	status(OpenThermStatus::NOT_INITIALIZED),	
 	response(0),
+	status(OpenThermStatus::NOT_INITIALIZED),
 	responseStatus(OpenThermResponseStatus::NONE),
 	responseTimestamp(0),
 	handleInterruptCallback(NULL),
@@ -244,8 +244,8 @@ unsigned long OpenTherm::buildRequest(OpenThermMessageType type, OpenThermMessag
 unsigned long OpenTherm::buildResponse(OpenThermMessageType type, OpenThermMessageID id, unsigned int data)
 {
     unsigned long response = data;
-    response |= type << 28;    
-    response |= ((unsigned long)id) << 16;
+    response |= static_cast<unsigned long>(type) << 28;
+    response |= static_cast<unsigned long>(id) << 16;
     if (parity(response)) response |= (1ul << 31);
     return response;
 }

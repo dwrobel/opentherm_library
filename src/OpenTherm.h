@@ -118,6 +118,7 @@ private:
     const bool isSlave;
 	
 	volatile unsigned long response;
+        volatile OpenThermStatus status;
 	volatile OpenThermResponseStatus responseStatus;
 	volatile unsigned long responseTimestamp;
 	volatile byte responseBitIndex;
@@ -131,7 +132,6 @@ private:
     void(*handleInterruptCallback)();
     void(*processResponseCallback)(unsigned long, OpenThermResponseStatus);
 public:	
-    volatile OpenThermStatus status;
 	OpenTherm(int inPin = 4, int outPin = 5, bool isSlave = false);
 	void begin(void(*handleInterruptCallback)(void));
 	void begin(void(*handleInterruptCallback)(void), void(*processResponseCallback)(unsigned long, OpenThermResponseStatus));
