@@ -225,29 +225,48 @@ void OpenTherm::end() {
 	}
 }
 
+#define OT_FSID(idx) string_##idx
+#define OT_FSTR(idx, s)  static const char OT_FSID(idx)[] PROGMEM = s
+
 const char *OpenTherm::statusToString(OpenThermResponseStatus status)
 {
+	OT_FSTR(_OT_STATUS_NONE,    "NONE");
+	OT_FSTR(_OT_STATUS_SUCCESS, "SUCCESS");
+	OT_FSTR(_OT_STATUS_INVALID, "INVALID");
+	OT_FSTR(_OT_STATUS_TIMEOUT, "TIMEOUT");
+	OT_FSTR(_OT_STATUS_UNKNOWN, "UNKNOWN");
+
 	switch (status) {
-		case NONE:    return "NONE";
-		case SUCCESS: return "SUCCESS";
-		case INVALID: return "INVALID";
-		case TIMEOUT: return "TIMEOUT";
-		default:      return "UNKNOWN";
+		case NONE:    return OT_FSID(_OT_STATUS_NONE);
+		case SUCCESS: return OT_FSID(_OT_STATUS_SUCCESS);
+		case INVALID: return OT_FSID(_OT_STATUS_INVALID);
+		case TIMEOUT: return OT_FSID(_OT_STATUS_TIMEOUT);
+		default:      return OT_FSID(_OT_STATUS_UNKNOWN);
 	}
 }
 
 const char *OpenTherm::messageTypeToString(OpenThermMessageType message_type)
 {
+	OT_FSTR(_OT_TYPE_READ_DATA,       "READ_DATA");
+	OT_FSTR(_OT_TYPE_WRITE_DATA,      "WRITE_DATA");
+	OT_FSTR(_OT_TYPE_INVALID_DATA,    "INVALID_DATA");
+	OT_FSTR(_OT_TYPE_RESERVED,        "RESERVED");
+	OT_FSTR(_OT_TYPE_READ_ACK,        "READ_ACK");
+	OT_FSTR(_OT_TYPE_WRITE_ACK,       "WRITE_ACK");
+	OT_FSTR(_OT_TYPE_DATA_INVALID,    "DATA_INVALID");
+	OT_FSTR(_OT_TYPE_UNKNOWN_DATA_ID, "UNKNOWN_DATA_ID");
+	OT_FSTR(_OT_TYPE_UNKNOWN,         "UNKNOWN");
+
 	switch (message_type) {
-		case READ_DATA:       return "READ_DATA";
-		case WRITE_DATA:      return "WRITE_DATA";
-		case INVALID_DATA:    return "INVALID_DATA";
-		case RESERVED:        return "RESERVED";
-		case READ_ACK:        return "READ_ACK";
-		case WRITE_ACK:       return "WRITE_ACK";
-		case DATA_INVALID:    return "DATA_INVALID";
-		case UNKNOWN_DATA_ID: return "UNKNOWN_DATA_ID";
-		default:              return "UNKNOWN";
+		case READ_DATA:       return OT_FSID(_OT_TYPE_READ_DATA);
+		case WRITE_DATA:      return OT_FSID(_OT_TYPE_WRITE_DATA);
+		case INVALID_DATA:    return OT_FSID(_OT_TYPE_INVALID_DATA);
+		case RESERVED:        return OT_FSID(_OT_TYPE_RESERVED);
+		case READ_ACK:        return OT_FSID(_OT_TYPE_READ_ACK);
+		case WRITE_ACK:       return OT_FSID(_OT_TYPE_WRITE_ACK);
+		case DATA_INVALID:    return OT_FSID(_OT_TYPE_DATA_INVALID);
+		case UNKNOWN_DATA_ID: return OT_FSID(_OT_TYPE_UNKNOWN_DATA_ID);
+		default:              return OT_FSID(_OT_TYPE_UNKNOWN);
 	}
 }
 
