@@ -408,45 +408,64 @@ OpenTherm::~OpenTherm()
     end();
 }
 
+#define OT_FSID(idx) string_##idx
+#define OT_FSTR(idx, s)  static const char OT_FSID(idx)[] PROGMEM = s
+
 const char *OpenTherm::statusToString(OpenThermResponseStatus status)
 {
+	OT_FSTR(_OT_STATUS_NONE,    "NONE");
+	OT_FSTR(_OT_STATUS_SUCCESS, "SUCCESS");
+	OT_FSTR(_OT_STATUS_INVALID, "INVALID");
+	OT_FSTR(_OT_STATUS_TIMEOUT, "TIMEOUT");
+	OT_FSTR(_OT_STATUS_UNKNOWN, "UNKNOWN");
+
     switch (status)
     {
     case OpenThermResponseStatus::NONE:
-        return "NONE";
+        return OT_FSID(_OT_STATUS_NONE);
     case OpenThermResponseStatus::SUCCESS:
-        return "SUCCESS";
+        return OT_FSID(_OT_STATUS_SUCCESS);
     case OpenThermResponseStatus::INVALID:
-        return "INVALID";
+        return OT_FSID(_OT_STATUS_INVALID);
     case OpenThermResponseStatus::TIMEOUT:
-        return "TIMEOUT";
+        return OT_FSID(_OT_STATUS_TIMEOUT);
     default:
-        return "UNKNOWN";
+        return OT_FSID(_OT_STATUS_UNKNOWN);
     }
 }
 
 const char *OpenTherm::messageTypeToString(OpenThermMessageType message_type)
 {
+	OT_FSTR(_OT_TYPE_READ_DATA,       "READ_DATA");
+	OT_FSTR(_OT_TYPE_WRITE_DATA,      "WRITE_DATA");
+	OT_FSTR(_OT_TYPE_INVALID_DATA,    "INVALID_DATA");
+	OT_FSTR(_OT_TYPE_RESERVED,        "RESERVED");
+	OT_FSTR(_OT_TYPE_READ_ACK,        "READ_ACK");
+	OT_FSTR(_OT_TYPE_WRITE_ACK,       "WRITE_ACK");
+	OT_FSTR(_OT_TYPE_DATA_INVALID,    "DATA_INVALID");
+	OT_FSTR(_OT_TYPE_UNKNOWN_DATA_ID, "UNKNOWN_DATA_ID");
+	OT_FSTR(_OT_TYPE_UNKNOWN,         "UNKNOWN");
+
     switch (message_type)
     {
     case OpenThermMessageType::READ_DATA:
-        return "READ_DATA";
+        return OT_FSID(_OT_TYPE_READ_DATA);
     case OpenThermMessageType::WRITE_DATA:
-        return "WRITE_DATA";
+        return OT_FSID(_OT_TYPE_WRITE_DATA);
     case OpenThermMessageType::INVALID_DATA:
-        return "INVALID_DATA";
+        return OT_FSID(_OT_TYPE_INVALID_DATA);
     case OpenThermMessageType::RESERVED:
-        return "RESERVED";
+        return OT_FSID(_OT_TYPE_RESERVED);
     case OpenThermMessageType::READ_ACK:
-        return "READ_ACK";
+        return OT_FSID(_OT_TYPE_READ_ACK);
     case OpenThermMessageType::WRITE_ACK:
-        return "WRITE_ACK";
+        return OT_FSID(_OT_TYPE_WRITE_ACK);
     case OpenThermMessageType::DATA_INVALID:
-        return "DATA_INVALID";
+        return OT_FSID(_OT_TYPE_DATA_INVALID);
     case OpenThermMessageType::UNKNOWN_DATA_ID:
-        return "UNKNOWN_DATA_ID";
+        return OT_FSID(_OT_TYPE_UNKNOWN_DATA_ID);
     default:
-        return "UNKNOWN";
+        return OT_FSID(_OT_TYPE_UNKNOWN);
     }
 }
 
