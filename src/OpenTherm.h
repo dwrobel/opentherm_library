@@ -77,6 +77,7 @@ enum OpenThermMessageID {
 	TflowCH2, // f8.8  Flow water temperature CH2 circuit (°C)
 	Tdhw2, // f8.8  Domestic hot water temperature 2 (°C)
 	Texhaust, // s16  Boiler exhaust temperature (°C)
+	BoilerFanSpeedSetpointAndActual = 35, // u8/u8  Boiler fan speed Setpoint and actual value
 	TdhwSetUBTdhwSetLB = 48, // s8 / s8  DHW setpoint upper & lower bounds for adjustment  (°C)
 	MaxTSetUBMaxTSetLB, // s8 / s8  Max CH water setpoint upper & lower bounds for adjustment  (°C)
 	HcratioUBHcratioLB, // s8 / s8  OTC heat curve ratio upper & lower bounds for adjustment  
